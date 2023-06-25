@@ -1,30 +1,55 @@
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AddItems from "./AddItems";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../../context/UserContext";
+import { sortArray } from "../../../../helpers/Helpers";
+import ItemButton from "./ItemButton";
+import Logo from '../../../../assets/images/logo-transparent.png'
+import { onValue, ref } from "firebase/database";
+import { db } from "../../../../firebase";
+import { Outlet, useParams } from "react-router-dom";
 
 
 export default function Items() {
-
+  const params = useParams();
+  const categoryId = params.catId
   const { toggleAddItems, setToggleAddItems } = useContext(UserContext)
+  const [itemList, setItemList] = useState([]);
 
-  console.log(toggleAddItems)
+  useEffect(() => {
+    setToggleAddItems(false)
+    const databaseRef = ref(db, `Ninongs/category/${categoryId}/items`);
+
+    onValue(databaseRef, (snapshot) => {
+      setItemList([])
+      const data = snapshot.val();
+      if (data !== null) {
+        const itemsArray = Object.values(data);
+        setItemList((previtems) => {
+          const uniqueitems = [...previtems, ...itemsArray];
+          return uniqueitems;
+        });
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <div className="flex flex-col mx-2 relative">
         <label className="text-2xl font-bold text-center">ITEMS</label>
         <div className='flex flex-row mx-2 mt-5 mb-5' >
-          {/* {categories && sortArray(categories).map((categ, index) => {
+          {itemList && sortArray(itemList).map((item, index) => {
             console.log(index)
             return <div className='flex flex-row mx-2' key={index}>
-              <CategoryButton
-                text={categ.name}
-                path={categ.sku}
+              <ItemButton
+                text={item.name}
+                path={item.sku}
                 icons={Logo}
               />
             </div>
-          })} */}
+          })}
           <div className="w-44 h-44 text-center shadow-2xl mx-2 rounded-2xl p-4 focus:bg-[#FD904D] hover:bg-[#FD904D] ease-in-out duration-600 active:scale-[0.95]" >
 
             <div className="relative items-center cursor-pointer" onClick={() => setToggleAddItems(true)}>
@@ -35,6 +60,7 @@ export default function Items() {
         </div>
       </div>
       {toggleAddItems && <AddItems />}
+      {categoryId && <Outlet />}
     </>
   )
 }

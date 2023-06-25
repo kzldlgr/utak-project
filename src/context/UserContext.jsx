@@ -26,8 +26,6 @@ export const UserContextProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-
-
   useEffect(() => {
     const databaseRef = ref(db, 'Ninongs/category');
 
@@ -44,6 +42,8 @@ export const UserContextProvider = ({ children }) => {
     });
   }, []);
 
+ 
+
 
   return (
     <UserContext.Provider value={{
@@ -54,7 +54,7 @@ export const UserContextProvider = ({ children }) => {
       categories,
       setCategories,
       toggleAddItems,
-      setToggleAddItems
+      setToggleAddItems,
     }}>
       {children}
     </UserContext.Provider>

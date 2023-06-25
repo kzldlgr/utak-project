@@ -4,7 +4,7 @@ import { useContext, useState } from "react"
 import { UserContext } from "../../../../context/UserContext"
 import { db } from '../../../../firebase'
 import { ref, set } from "firebase/database"
-import { generateSku } from '../../../../helpers/Helpers'
+import { generateCategory } from '../../../../helpers/Helpers'
 
 // eslint-disable-next-line react/prop-types
 export default function AddCategory() {
@@ -12,10 +12,10 @@ export default function AddCategory() {
   const { setToggleAddCat } = useContext(UserContext);
 
   const addCategory = () => {
-    const sku = generateSku();
-    set(ref(db, 'Ninongs/category/' + sku), {
+    const cat = generateCategory();
+    set(ref(db, 'Ninongs/category/' + cat), {
       name: category,
-      sku: sku,
+      categoryId: cat,
     })
     setCategory("");
     setToggleAddCat(false)

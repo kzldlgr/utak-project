@@ -3,7 +3,7 @@ export default [
     menu: '/ninongs/sales',
     submenu: [
       {
-        text: 'transaction',
+        text: 'Transaction',
         path: 'transactions',
         ico: 'faWallet'
       },
@@ -88,6 +88,14 @@ export default [
       {
         text: 'Cashier profile',
         path: '/ninongs',
+      },
+      {
+        text: 'Time logs',
+        path: '/ninongs'
+      },
+      {
+        text: 'New Cashier',
+        path: '/ninongs'        
       }
     ]
   }

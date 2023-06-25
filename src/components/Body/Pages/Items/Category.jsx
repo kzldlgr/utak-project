@@ -16,7 +16,7 @@ export default function Category() {
 
   return (
     <>
-      {params.skuId ? <Outlet /> :
+      {params.catId ? <Outlet /> :
         <>
           <div className="flex flex-col mx-2 relative">
             <label className="text-2xl font-bold text-center">CATEGORIES</label>
@@ -25,7 +25,7 @@ export default function Category() {
                 return <div className='flex flex-row mx-2' key={index}>
                   <CategoryButton
                     text={categ.name}
-                    path={categ.sku}
+                    path={categ.categoryId}
                     icons={Logo}
                   />
                 </div>

@@ -7,6 +7,7 @@ import SubMenu from './components/Body/SubMenu/SubMenu';
 import Category from './components/Body/Pages/Items/Category';
 import Items from './components/Body/Pages/Items/Items'
 import { UserContextProvider } from './context/UserContext';
+import EditItems from './components/Body/Pages/Items/EditItems'
 
 function App() {
 
@@ -20,7 +21,9 @@ function App() {
             <Route path='history' element={<History />} />
           </Route>
           <Route path='product' element={<Category />} >
-            <Route path=':skuId' element={<Items />} />
+            <Route path=':catId' element={<Items />} >
+              <Route path=':itemId' element={<EditItems />} />
+            </Route>
           </Route>
           <Route path='inventory' element={<SubMenu />} />
           <Route path='reports' element={<SubMenu />} />
