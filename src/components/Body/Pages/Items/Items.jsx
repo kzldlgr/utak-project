@@ -21,7 +21,7 @@ export default function Items() {
       return catId.name
     }
   });
-
+ 
 
   useEffect(() => {
     setToggleAddItems(false)
@@ -40,7 +40,6 @@ export default function Items() {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <>
       <div className="flex flex-col mx-2 relative">

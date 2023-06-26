@@ -10,7 +10,6 @@ import { useParams } from "react-router-dom";
 import Variants from "./Variants";
 
 export default function AddItems() {
-
   const { setToggleAddItems } = useContext(UserContext)
   const initialValues = { name: "", cost: "", price: "", options: { type: 'none', opt: {} }, stock: "" }
   const [formValues, setFormValues] = useState(initialValues);
@@ -106,7 +105,7 @@ const handleVariantChange = (variantValues) => {
           </div>
 
           <div className="flex flex-col px-6">
-            <label className="text-lg font-bold p-1">Variant</label>
+            <label className="text-lg font-bold p-1 text-center">Variant</label>
             <div className="radio-input mb-2">
               <label>
                 <input type="radio" onChange={handleChange} name={formValues.options.type} value="none" defaultChecked />
@@ -140,7 +139,6 @@ const handleVariantChange = (variantValues) => {
                 <div className="flex flex-row justify-between" key={index}>
                   <Variants
                     text={variant}
-                    type={variantArray.type}
                     onPriceChange={handleVariantChange}
                   />
                 </div>

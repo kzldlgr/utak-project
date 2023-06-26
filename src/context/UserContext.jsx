@@ -2,6 +2,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth, db } from '../firebase'
 import { onValue, ref } from "firebase/database";
+
 export let UserContext = createContext({});
 
 // eslint-disable-next-line react/prop-types
@@ -41,8 +42,6 @@ export const UserContextProvider = ({ children }) => {
       }
     });
   }, []);
-
-
 
 
   return (
