@@ -16,10 +16,12 @@ export default function Items() {
   const categoryId = params.catId
   const { toggleAddItems, setToggleAddItems, categories } = useContext(UserContext)
   const [itemList, setItemList] = useState([]);
-  const [categoryName, setCategoryName] = useState([]);
+  const categoryName = categories.find((catId) => {
+    if (catId.categoryId == categoryId) {
+      return catId.name
+    }
+  });
 
-
-  console.log(categoryName)
 
   useEffect(() => {
     setToggleAddItems(false)
@@ -36,11 +38,6 @@ export default function Items() {
         });
       }
     });
-    setCategoryName(categories.find((catId) => {
-      if(catId.categoryId == categoryId){
-        return catId.name
-      }
-    }))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -50,7 +47,6 @@ export default function Items() {
         <label className="text-2xl font-bold text-center">{categoryName && categoryName.name}</label>
         <div className='flex flex-row mx-2 mt-5 mb-5' >
           {itemList && sortArray(itemList).map((item, index) => {
-            console.log(index)
             return <div className='flex flex-row mx-2' key={index}>
               <ItemButton
                 text={item.name}

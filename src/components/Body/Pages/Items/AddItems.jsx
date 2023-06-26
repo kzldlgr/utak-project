@@ -12,25 +12,36 @@ import Variants from "./Variants";
 export default function AddItems() {
 
   const { setToggleAddItems } = useContext(UserContext)
-  const initialValues = { name: "", cost: "", price: "", options: "none", stock: "" }
+  const initialValues = { name: "", cost: "", price: "", options: { type: 'none', opt: {} }, stock: "" }
   const [formValues, setFormValues] = useState(initialValues);
+  // eslint-disable-next-line no-unused-vars
   const [formErrors, setFormErrors] = useState({});
   const params = useParams();
   const categoryId = params.catId;
   const variantArray = Variant.find((vari) => {
-    if (vari.options === formValues.options) {
+    if (vari.type === formValues.options.type) {
       return vari
     }
   })
 
-  console.log(formValues)
-  console.log(formErrors)
-  console.log(validate(formValues))
-
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  }
+    const { name, value, type } = e.target;
+    if (type === "radio") {
+      setFormValues({ ...formValues, options: { type: value, opt: {} } });
+    } else {
+      setFormValues({ ...formValues, [name]: value });
+    }
+  };
+
+const handleVariantChange = (variantValues) => {
+  setFormValues((prevValues) => ({
+    ...prevValues,
+    options: {
+      ...prevValues.options,
+      opt: { ...prevValues.options.opt, ...variantValues },
+    },
+  }));
+};
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,10 +57,13 @@ export default function AddItems() {
         sku: sku,
       })
     }
+    setToggleAddItems(false);
+    setFormValues(initialValues)
+
   }
 
   return (
-    <div className="absolute inset-0 max-h-max w-full max-w-sm mx-auto px-4 mt-24 py-4 bg-white rounded-2xl shadow-xl">
+    <div className="absolute inset-0 max-h-max w-full max-w-sm mx-auto px-4 mt-16 py-4 bg-white rounded-2xl shadow-xl">
       <div className="absolute top-0 right-0 mt-1 mr-1">
         <FontAwesomeIcon icon={faXmarkCircle} onClick={() => setToggleAddItems(false)} />
       </div>
@@ -93,22 +107,22 @@ export default function AddItems() {
 
           <div className="flex flex-col px-6">
             <label className="text-lg font-bold p-1">Variant</label>
-            <div className="radio-input">
+            <div className="radio-input mb-2">
               <label>
-                <input type="radio" onChange={handleChange} name="options" value="none" defaultChecked />
+                <input type="radio" onChange={handleChange} name={formValues.options.type} value="none" defaultChecked />
                 <span>None</span>
               </label>
               <label>
-                <input type="radio" onChange={handleChange} name="options" value="sizes" />
+                <input type="radio" onChange={handleChange} name={formValues.options.type} value="sizes" />
                 <span>Sizes</span>
               </label>
               <label>
-                <input type="radio" onChange={handleChange} name="options" value="quantity" />
+                <input type="radio" onChange={handleChange} name={formValues.options.type} value="quantity" />
                 <span>Quantity</span>
               </label>
               <span className="selection"></span>
             </div>
-            {formValues.options == "none" ?
+            {formValues.options.type === "none" ? (
               <div className="flex flex-row justify-between">
                 <label className="text-lg font-bold p-1">Item Price:</label>
                 <input
@@ -119,23 +133,19 @@ export default function AddItems() {
                   placeholder="Price"
                   className="w-3/12 border-2 p-1 rounded-xl"
                 />
-              </div> :
-              variantArray.opt.map((variant, index) => {
-                return <div className="flex flex-row justify-between" key={index}>
-                    <Variants 
-                      text={variant}
-                      onPriceChange={(newPrice) =>
-                        setFormValues((prevValues) => ({
-                          ...prevValues,
-                          options: [...newPrice, newPrice],
-                        }))
-                      }
-                      name={formValues.options}
-                    />
+              </div>
+            ) : (
+              variantArray &&
+              Object.keys(variantArray.opt).map((variant, index) => (
+                <div className="flex flex-row justify-between" key={index}>
+                  <Variants
+                    text={variant}
+                    type={variantArray.type}
+                    onPriceChange={handleVariantChange}
+                  />
                 </div>
-              })
-            }
-
+              ))
+            )}
           </div>
           <button className="px-4 py-2 w-1/3 text-md font-bold rounded-2xl bg-[#FD904D] active:scale-[0.95]">
             Add

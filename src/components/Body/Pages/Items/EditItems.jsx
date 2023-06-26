@@ -1,11 +1,30 @@
 import { faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate } from "react-router-dom";
+import { onValue, ref } from "firebase/database";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { db } from "../../../../firebase";
 
 export default function EditItems() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const params = useParams();
 
-  const handleSubmit= () => {
+  const [itemDetails, setItemDetails] = useState([]);
+  console.log(itemDetails)
+
+  useEffect(() => {
+    const databaseRef = ref(db, `Ninongs/category/${params.catId}/items/${params.itemId}`);
+    onValue(databaseRef, (snapshot) => {
+      setItemDetails([])
+      const data = snapshot.val();
+      if (data !== null) {
+        setItemDetails(data)
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleSubmit = () => {
 
   }
 
