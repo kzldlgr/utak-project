@@ -1,4 +1,4 @@
-import { faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { onValue, ref, remove, update } from "firebase/database";
 import { useEffect, useState } from "react";
@@ -75,9 +75,12 @@ export default function EditItems() {
     navigate(`/ninongs/product/${params.catId}`, { replace: true })
   }
   return (
-    <div className="absolute inset-0 max-h-max w-full max-w-sm mx-auto px-4 mt-16 py-4 bg-white rounded-2xl shadow-xl">
+    <div className="absolute inset-0 max-h-max w-full max-w-sm mx-auto px-4 mt-10 py-4 bg-white rounded-2xl shadow-xl">
       <div className="absolute top-0 right-0 mt-1 mr-1">
         <FontAwesomeIcon icon={faXmarkCircle} onClick={() => navigate(-1)} />
+      </div>
+      <div className="absolute top-6 left-6 mt-1 mr-1 text-red-500 cursor-pointer">
+        <FontAwesomeIcon icon={faTrashCan} onClick={handleDelete} />
       </div>
       <div className="mb-2">
         <h1 className="text-xl font-bold border-b border-slate-600 p-2 text-center">SKU: {itemDetails && itemDetails.sku}</h1>
@@ -181,12 +184,9 @@ export default function EditItems() {
               ))
             )}
           </div>
-          <div className="flex flex-row my-2 w-full justify-around">
+          <div className="flex flex-row my-2 w-full justify-center">
             <button className="px-4 py-2 w-1/3 text-md font-bold rounded-2xl bg-[#FD904D] active:scale-[0.95]">
               Save
-            </button>
-            <button className="px-4 py-2 w-1/3 text-md font-bold rounded-2xl bg-[#fa2121] active:scale-[0.95] text-white" onClick={handleDelete}>
-              Delete
             </button>
           </div>
         </div>

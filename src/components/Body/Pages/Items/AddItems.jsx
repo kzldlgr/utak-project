@@ -32,15 +32,15 @@ export default function AddItems() {
     }
   };
 
-const handleVariantChange = (variantValues) => {
-  setFormValues((prevValues) => ({
-    ...prevValues,
-    options: {
-      ...prevValues.options,
-      opt: { ...prevValues.options.opt, ...variantValues },
-    },
-  }));
-};
+  const handleVariantChange = (variantValues) => {
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      options: {
+        ...prevValues.options,
+        opt: { ...prevValues.options.opt, ...variantValues },
+      },
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -145,9 +145,11 @@ const handleVariantChange = (variantValues) => {
               ))
             )}
           </div>
-          <button className="px-4 py-2 w-1/3 text-md font-bold rounded-2xl bg-[#FD904D] active:scale-[0.95]">
-            Add
-          </button>
+          <div className="flex flex-row my-2 w-full justify-center">
+            <button className="px-4 py-2 w-1/3 text-md font-bold rounded-2xl bg-[#FD904D] active:scale-[0.95] justify-center">
+              Create
+            </button>
+          </div>
         </div>
       </form >
     </div >

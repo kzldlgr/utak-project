@@ -27,7 +27,7 @@ export default function SignIn() {
 
 
   return (
-    <div className='max-w-[1240px] mt-[160px] w-full h-full mx-auto bg-[url(src/assets/images/banner.jpg)] bg-cover bg-no-repeat'>
+    <div className='max-w-[1240px] mt-[160px] w-full h-full mx-auto bg-cover bg-no-repeat' style={{ backgroundImage: "url(src/assets/images/banner.jpg)" }}>
       <div className="p-12 w-[600px] h-full">
         <form className="w-full h-[500px] py-[80px] p-4" onSubmit={signIn}>
           <div className="max-w-full flex flex-col gap-4 bg-white bg-opacity-75 p-[15px] rounded-2xl relative ">
