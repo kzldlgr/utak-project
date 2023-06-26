@@ -14,8 +14,12 @@ import { Outlet, useParams } from "react-router-dom";
 export default function Items() {
   const params = useParams();
   const categoryId = params.catId
-  const { toggleAddItems, setToggleAddItems } = useContext(UserContext)
+  const { toggleAddItems, setToggleAddItems, categories } = useContext(UserContext)
   const [itemList, setItemList] = useState([]);
+  const [categoryName, setCategoryName] = useState([]);
+
+
+  console.log(categoryName)
 
   useEffect(() => {
     setToggleAddItems(false)
@@ -32,13 +36,18 @@ export default function Items() {
         });
       }
     });
+    setCategoryName(categories.find((catId) => {
+      if(catId.categoryId == categoryId){
+        return catId.name
+      }
+    }))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
       <div className="flex flex-col mx-2 relative">
-        <label className="text-2xl font-bold text-center">ITEMS</label>
+        <label className="text-2xl font-bold text-center">{categoryName && categoryName.name}</label>
         <div className='flex flex-row mx-2 mt-5 mb-5' >
           {itemList && sortArray(itemList).map((item, index) => {
             console.log(index)

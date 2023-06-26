@@ -42,7 +42,7 @@ export const UserContextProvider = ({ children }) => {
     });
   }, []);
 
- 
+
 
 
   return (
@@ -54,7 +54,7 @@ export const UserContextProvider = ({ children }) => {
       categories,
       setCategories,
       toggleAddItems,
-      setToggleAddItems,
+      setToggleAddItems
     }}>
       {children}
     </UserContext.Provider>

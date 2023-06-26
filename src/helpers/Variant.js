@@ -1,15 +1,21 @@
 export default [
   {
+    options: 'none',
+    opt: [
+      'Item'
+    ]
+  },
+  {
     options: 'sizes',
-    type: [
+    opt: [
       'Small',
       'Medium',
       'Large'
-    ] 
+    ]
   },
   {
     options: 'quantity',
-    type: [
+    opt: [
       '4-pcs',
       '6-pcs',
       '8-pcs',
