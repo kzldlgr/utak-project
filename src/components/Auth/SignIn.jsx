@@ -2,7 +2,8 @@ import { useState } from "react";
 import { auth, errorFirebase } from '../../firebase'
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-// import { UserContext } from "../../context/UserContext";
+import { filterName } from "../../helpers/Helpers";
+import Swal from "sweetalert2";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -18,6 +19,13 @@ export default function SignIn() {
         if (user) {
           setFormErrors("")
           navigate("/ninongs", { replace: true })
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: `Gooday! ${filterName(user.user.email)}`,
+            showConfirmButton: false,
+            timer: 1500
+          })
         }
       }).catch((error) => {
         setFormErrors(errorFirebase[error.code])

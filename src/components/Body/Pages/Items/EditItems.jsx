@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../../../../firebase";
 import Variant from "../../../../helpers/Variant";
+import Swal from "sweetalert2";
 
 export default function EditItems() {
   const navigate = useNavigate();
@@ -22,15 +23,15 @@ export default function EditItems() {
   const [variant, setVariant] = useState("");
   const [price, setPrice] = useState("");
   const [opt, setOpt] = useState("");
-  const optionsValue = { type: variant, opt: opt  };
+  const optionsValue = { type: variant, opt: opt };
   const variantArray = Variant.find(vari => vari.type === variant);
-
-  console.log(itemName)
-  console.log(itemCost)
-  console.log(variant)
-  console.log(price)
-  console.log(opt)
-  console.log(itemStock)
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'bg-green-500 p-2 text-white rounded-xl font-bold mx-1',
+      cancelButton: 'bg-red-500 p-2 text-white rounded-xl font-bold mx-1'
+    },
+    buttonsStyling: false
+  })
 
   useEffect(() => {
     const databaseRef = ref(db, `Ninongs/category/${params.catId}/items/${params.itemId}`);
@@ -49,9 +50,6 @@ export default function EditItems() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.itemId]);
 
-  console.log(variantArray);
-  console.log(itemDetails);
-
   const handleUpdate = () => {
     update(ref(db, `Ninongs/category/${params.catId}/items/${params.itemId}`), {
       name: itemName,
@@ -68,11 +66,44 @@ export default function EditItems() {
       options: { type: 'none', opt: {} },
       stock: ''
     })
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: `${itemName} item successfully updated`,
+      showConfirmButton: false,
+      timer: 1500
+    })
   };
 
   const handleDelete = () => {
-    remove(ref(db, `Ninongs/category/${params.catId}/items/${params.itemId}`))
-    navigate(`/ninongs/product/${params.catId}`, { replace: true })
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this Item!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        remove(ref(db, `Ninongs/category/${params.catId}/items/${params.itemId}`))
+        navigate(`/ninongs/product/${params.catId}`, { replace: true })
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your Item has been deleted.',
+          'success'
+        )
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          '',
+          'error'
+        )
+      }
+    })
   }
   return (
     <div className="absolute inset-0 max-h-max w-full max-w-sm mx-auto px-4 mt-10 py-4 bg-white rounded-2xl shadow-xl">

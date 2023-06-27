@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
-import { useContext, } from 'react'
+import { useContext, useEffect, } from 'react'
 import CategoryButton from './CategoryButton';
 import AddCategory from './AddCategory';
 import { UserContext } from '../../../../context/UserContext';
 import { sortArray } from '../../../../helpers/Helpers';
-import Logo from '../../../../assets/images/logo-transparent.png'
+import Logo from '../../../../assets/images/red-logo.png'
 import { Outlet, useParams } from 'react-router-dom';
 
 
@@ -13,7 +13,10 @@ import { Outlet, useParams } from 'react-router-dom';
 export default function Category() {
   const { toggleAddCat, setToggleAddCat, categories } = useContext(UserContext);
   const params = useParams();
-
+  
+  useEffect(()=>{
+    setToggleAddCat(false)
+  },[])
   return (
     <>
       {params.catId ? <Outlet /> :
@@ -22,7 +25,7 @@ export default function Category() {
             <label className="text-2xl font-bold text-center">CATEGORIES</label>
             <div className='flex flex-row mx-2 mt-5 mb-5' >
               {categories && sortArray(categories).map((categ, index) => {
-                return <div className='flex flex-row mx-2' key={index}>
+                return <div className='flex flex-row mx-2 ' key={index}>
                   <CategoryButton
                     text={categ.name}
                     path={categ.categoryId}

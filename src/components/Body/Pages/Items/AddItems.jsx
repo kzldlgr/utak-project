@@ -8,6 +8,7 @@ import { ref, set } from "firebase/database";
 import { db } from "../../../../firebase";
 import { useParams } from "react-router-dom";
 import Variants from "./Variants";
+import Swal from "sweetalert2";
 
 export default function AddItems() {
   const { setToggleAddItems } = useContext(UserContext)
@@ -58,7 +59,13 @@ export default function AddItems() {
     }
     setToggleAddItems(false);
     setFormValues(initialValues)
-
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: `${formValues.name} item successfully created`,
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 
   return (

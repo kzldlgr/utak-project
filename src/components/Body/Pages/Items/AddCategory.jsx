@@ -5,7 +5,7 @@ import { UserContext } from "../../../../context/UserContext"
 import { db } from '../../../../firebase'
 import { ref, set } from "firebase/database"
 import { generateCategory } from '../../../../helpers/Helpers'
-
+import Swal from "sweetalert2"
 // eslint-disable-next-line react/prop-types
 export default function AddCategory() {
   const [category, setCategory] = useState("");
@@ -19,6 +19,14 @@ export default function AddCategory() {
     })
     setCategory("");
     setToggleAddCat(false)
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: `${category} category! has been added!`,
+      showConfirmButton: false,
+      timer: 1500
+    })
+    
   }
 
   return (
