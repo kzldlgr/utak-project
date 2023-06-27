@@ -14,29 +14,7 @@ export default [
     ]
   },
   {
-    menu: '/ninongs/items',
-    submenu: [
-      {
-        text: 'View All Items',
-        path: 'view-items',
-      },
-      {
-        text: 'View Category',
-        path: 'view-category',
-      },
-      {
-        text: 'Add Item',
-        path: 'add-items'
-      },
-      {
-        text: 'Add Category',
-        path: 'add-category',
-      },
-      {
-        text: 'Edit Item',
-        path: 'edit-items'
-      }
-    ]
+    menu: '/ninongs/items'
   },
   {
     menu: '/ninongs/inventory',
@@ -95,7 +73,11 @@ export default [
       },
       {
         text: 'New Cashier',
-        path: '/ninongs'        
+        path: 'new-cashier'
+      },
+      {
+        text: 'Manage Categories',
+        path: 'category'
       }
     ]
   }

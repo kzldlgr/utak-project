@@ -8,6 +8,9 @@ import Category from './components/Body/Pages/Items/Category';
 import Items from './components/Body/Pages/Items/Items'
 import { UserContextProvider } from './context/UserContext';
 import EditItems from './components/Body/Pages/Items/EditItems'
+import ManageCategory from './components/Body/Pages/Utilities/ManageCategory';
+import NewCashier from './components/Body/Pages/Utilities/NewCashier';
+import SelectedCategory from './components/Body/Pages/Utilities/SelectedCategory';
 
 function App() {
 
@@ -27,7 +30,12 @@ function App() {
           </Route>
           <Route path='inventory' element={<SubMenu />} />
           <Route path='reports' element={<SubMenu />} />
-          <Route path='utilities' element={<SubMenu />} />
+          <Route path='utilities' element={<SubMenu />} >
+            <Route path='category' element={<ManageCategory />}>
+              <Route path=':catId' element={<SelectedCategory />} />
+            </Route>
+            <Route path='new-cashier' element={<NewCashier />} />
+          </Route>
         </Route>
         <Route path='*' element={<Navigate to="/ninongs" replace={true} />} />
       </Routes>

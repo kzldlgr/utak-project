@@ -10,7 +10,7 @@ export default function SubMenu() {
 
   return (
     <div className='flex flex-col mx-2 '>
-      <label className="text-2xl font-bold text-center">{location && location.pathname.replace('/ninongs/', "").toUpperCase()}</label>
+      <label className="text-2xl font-bold text-center">{location && location.pathname.replace('/ninongs/', "").toUpperCase().replace('/', " > ")}</label>
       <div className='flex flex-row mx-2 mt-5 mb-5'>
         {SubList && SubList.submenu.map((menu, index) => {
           return (
