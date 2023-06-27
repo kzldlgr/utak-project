@@ -2,7 +2,9 @@
 ![banner](https://github.com/kzldlgr/utak-project/assets/99521214/a8394833-1888-40cd-8ef1-41685505f2d1)
 
 # Installation
-Clone the repository by `https://github.com/kzldlgr/utak-project.git`
+* Clone the repository by `https://github.com/kzldlgr/utak-project.git`
+  
+  ![image](https://github.com/kzldlgr/utak-project/assets/99521214/81d31ace-2c91-4608-a4e9-0530f1ecf29d)
 
 # Simple Crud for MENU
  **User story**
