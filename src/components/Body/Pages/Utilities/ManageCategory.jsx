@@ -31,8 +31,15 @@ export default function Category() {
   const updateCategory = () => {
     update(ref(db, `Ninongs/category/${params.catId}`), {
       name: selectedCategory,
-    }
-    )
+    })
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: `${category} category! has been updated!`,
+      showConfirmButton: false,
+      timer: 1500
+    })
+    navigate(`/ninongs/utilities/category`, { replace: true })
   }
   useEffect(() => {
     fetchCategories()

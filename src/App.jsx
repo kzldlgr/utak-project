@@ -10,7 +10,6 @@ import { UserContextProvider } from './context/UserContext';
 import EditItems from './components/Body/Pages/Items/EditItems'
 import ManageCategory from './components/Body/Pages/Utilities/ManageCategory';
 import NewCashier from './components/Body/Pages/Utilities/NewCashier';
-import SelectedCategory from './components/Body/Pages/Utilities/SelectedCategory';
 
 function App() {
 
@@ -32,7 +31,7 @@ function App() {
           <Route path='reports' element={<SubMenu />} />
           <Route path='utilities' element={<SubMenu />} >
             <Route path='category' element={<ManageCategory />}>
-              <Route path=':catId' element={<SelectedCategory />} />
+              <Route path=':catId' element={<ManageCategory />} />
             </Route>
             <Route path='new-cashier' element={<NewCashier />} />
           </Route>
