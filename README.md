@@ -8,7 +8,7 @@
 
 # Simple Crud for MENU
  **User story**
-  * create a Items with:
+  * create,read,update,delete an Items:
     * category name  
     * item name
     * item cost
