@@ -14,7 +14,7 @@ export default function EditItems() {
     name: '',
     cost: '',
     price: '',
-    options: { type: 'none', opt: {} },
+    options: { type: 'none', variant: {} },
     stock: ''
   });
   const [itemName, setItemName] = useState("");
@@ -23,7 +23,7 @@ export default function EditItems() {
   const [variant, setVariant] = useState("");
   const [price, setPrice] = useState("");
   const [opt, setOpt] = useState("");
-  const optionsValue = { type: variant, opt: opt };
+  const optionsValue = { type: variant, variant: opt };
   const variantArray = Variant.find(vari => vari.type === variant);
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
@@ -44,7 +44,7 @@ export default function EditItems() {
         setItemStock(data.stock || "");
         setVariant(data.options.type || "");
         setPrice(data.price || "");
-        setOpt(data.options.opt || "");
+        setOpt(data.options.variant || "");
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -198,15 +198,15 @@ export default function EditItems() {
               </div>
             ) : (
               variantArray &&
-              Object.keys(variantArray.opt).map((variant, index) => (
+              Object.keys(variantArray.variant).map((vari, index) => (
                 <div className="flex flex-row justify-between" key={index}>
                   <div className="flex flex-row justify-between mt-2">
-                    <label className="text-lg font-bold w-36 p-1">{variant} price:</label>
+                    <label className="text-lg font-bold w-36 p-1">{vari} price:</label>
                     <input
                       type="text"
-                      name={variant}
-                      value={opt[variant] || ""}
-                      onChange={e => setOpt(prevState => ({ ...prevState, [variant]: e.target.value }))}
+                      name={vari}
+                      value={opt[vari] || ""}
+                      onChange={e => setOpt(prevState => ({ ...prevState, [vari]: e.target.value }))}
                       placeholder="Price"
                       className="w-3/12 border-2 p-1 rounded-xl"
                     />

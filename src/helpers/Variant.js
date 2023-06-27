@@ -2,13 +2,13 @@
 export default [
   {
     type: 'none',
-    opt: {
+    variant: {
       Item: ''
     }
   },
   {
     type: 'sizes',
-    opt: {
+    variant: {
       Small: '',
       Medium: '',
       Large: ''
@@ -16,7 +16,7 @@ export default [
   },
   {
     type: 'quantity',
-    opt: {
+    variant: {
       '4-pcs': '',
       '6-pcs': '',
       '8-pcs': '',

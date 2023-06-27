@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 
 export default function AddItems() {
   const { setToggleAddItems } = useContext(UserContext)
-  const initialValues = { name: "", cost: "", price: "", options: { type: 'none', opt: {} }, stock: "" }
+  const initialValues = { name: "", cost: "", price: "", options: { type: 'none', variant: {} }, stock: "" }
   const [formValues, setFormValues] = useState(initialValues);
   // eslint-disable-next-line no-unused-vars
   const [formErrors, setFormErrors] = useState({});
@@ -24,10 +24,13 @@ export default function AddItems() {
     }
   })
 
+  console.log(variantArray)
+  console.log(Variant)
+
   const handleChange = (e) => {
     const { name, value, type } = e.target;
     if (type === "radio") {
-      setFormValues({ ...formValues, options: { type: value, opt: {} } });
+      setFormValues({ ...formValues, options: { type: value, variant: {} } });
     } else {
       setFormValues({ ...formValues, [name]: value });
     }
@@ -38,7 +41,7 @@ export default function AddItems() {
       ...prevValues,
       options: {
         ...prevValues.options,
-        opt: { ...prevValues.options.opt, ...variantValues },
+        variant: { ...prevValues.options.variant, ...variantValues },
       },
     }));
   };
@@ -142,10 +145,10 @@ export default function AddItems() {
               </div>
             ) : (
               variantArray &&
-              Object.keys(variantArray.opt).map((variant, index) => (
+              Object.keys(variantArray.variant).map((vari, index) => (
                 <div className="flex flex-row justify-between" key={index}>
                   <Variants
-                    text={variant}
+                    text={vari}
                     onPriceChange={handleVariantChange}
                   />
                 </div>
