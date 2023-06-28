@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { filterName } from "../../helpers/Helpers";
 import Swal from "sweetalert2";
+import Banner from '../../assets/images/banner.jpg'
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -35,7 +36,7 @@ export default function SignIn() {
 
 
   return (
-    <div className='max-w-[1240px] mt-[160px] w-full h-full mx-auto bg-cover bg-no-repeat' style={{ backgroundImage: "url(src/assets/images/banner.jpg)" }}>
+    <div className='max-w-[1240px] mt-[160px] w-full h-full mx-auto bg-cover bg-no-repeat' style={{ backgroundImage: `url(${Banner})` }}>
       <div className="p-12 w-[600px] h-full">
         <form className="w-full h-[500px] py-[80px] p-4" onSubmit={signIn}>
           <div className="max-w-full flex flex-col gap-4 bg-white bg-opacity-75 p-[15px] rounded-2xl relative ">
