@@ -6,6 +6,10 @@
   
   ![image](https://github.com/kzldlgr/utak-project/assets/99521214/81d31ace-2c91-4608-a4e9-0530f1ecf29d)
 
+# admin account
+ * **username:** admin_store@email.com
+* **password:** qweqweqwe
+
 # Simple Crud for MENU
  **User story**
   * create,read,update,delete an Items:
