@@ -24,9 +24,6 @@ export default function Category() {
     },
     buttonsStyling: false
   })
-  console.log(params.catId)
-  console.log(categories)
-  console.log(selectedCategory)
 
   const updateCategory = () => {
     update(ref(db, `Ninongs/category/${params.catId}`), {
@@ -56,7 +53,7 @@ export default function Category() {
     Swal.fire({
       position: 'top-end',
       icon: 'success',
-      title: `${category} category! has been added!`,
+      title: 'Category! has been added!',
       showConfirmButton: false,
       timer: 1500
     })
